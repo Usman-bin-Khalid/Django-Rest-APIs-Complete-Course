@@ -1,112 +1,103 @@
-# 🚀 Complete Backend Development Course – Node.js, Express.js & MongoDB
+# 🚀 Django REST APIs – Complete Course
 
-![Node.js](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js)
-![Express.js](https://img.shields.io/badge/Express.js-Web%20Framework-black?style=for-the-badge&logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen?style=for-the-badge&logo=mongodb)
-![REST API](https://img.shields.io/badge/REST-API-blue?style=for-the-badge&logo=postman)
+![Django REST Framework](https://img.shields.io/badge/Django%20REST%20Framework-API%20Development-green?style=for-the-badge&logo=django)
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)
 
-A **complete backend development course repository** using **Node.js, Express.js, and MongoDB**.  
-This repo covers everything from backend fundamentals to **building real-world REST APIs and full projects** like **Airbnb backend**.  
+A **complete guide to Django REST Framework (DRF)** covering everything from the basics to building full-fledged APIs and projects.  
+This repository is designed for beginners and intermediate developers who want to master **RESTful API development with Django**.  
 
 ---
 
 ## 📚 What You Will Learn
 
-This repository covers **every major backend concept** step by step:
+This repository covers **step by step concepts** with code examples:
 
-- ✅ Node.js Basics & Project Setup  
-- ✅ Express.js Fundamentals (Routes, Middleware, Controllers)  
-- ✅ RESTful API Design & Best Practices  
-- ✅ Models & MongoDB (Mongoose ODM)  
+- ✅ Django Project & App Setup  
+- ✅ Django Models & ORM  
+- ✅ Django Views (Function-Based & Class-Based)  
+- ✅ Django REST Framework Basics  
+- ✅ Serializers & ModelSerializers  
 - ✅ CRUD Operations (Create, Read, Update, Delete APIs)  
-- ✅ Authentication & Authorization (JWT, OAuth)  
-- ✅ Error Handling & Logging  
-- ✅ Async Programming (Promises, Async/Await)  
-- ✅ File Uploads & Static Files  
-- ✅ Environment Variables & Config Management  
-- ✅ Utils, Helpers & Modular Code Organization  
-- ✅ Testing APIs with Postman  
-- ✅ Deployment & Production Best Practices  
-- ✅ Complete Real-World Projects (Airbnb Backend + More)  
+- ✅ Relationships in APIs (One-to-One, One-to-Many, Many-to-Many)  
+- ✅ Authentication & Permissions  
+- ✅ Pagination & Filtering  
+- ✅ Error Handling & Validations  
+- ✅ Advanced DRF Concepts  
+- ✅ Mini Projects & Real-World API Development  
 
 ---
 
 ## 📂 Repository Structure
 
 ```bash
-Complete-Course-Backend-Node-Js-Express-Js-Mongo-DB-REST-APIs/
-│── 01_basics/              # Node.js basics & setup
-│── 02_express/             # Express.js routes, controllers, middleware
-│── 03_mongodb/             # MongoDB & Mongoose models
-│── 04_crud/                # CRUD operations APIs
-│── 05_auth/                # Authentication & Authorization
-│── 06_advanced/            # Error handling, file uploads, utils
-│── 07_projects/            # Real-world projects (Airbnb backend, etc.)
-│── config/                 # Config & environment variables
-│── package.json            # Dependencies
-└── README.md               # This file
+Django-Rest-APIs-Complete-Course/
+│── 01_models/               # Django Models examples
+│── 02_views/                # Views & Class-based Views
+│── 03_serializers/          # Serializers & ModelSerializers
+│── 04_crud_apis/            # Create, Read, Update, Delete APIs
+│── 05_authentication/       # Auth & Permissions
+│── 06_advanced/             # Advanced DRF concepts
+│── 07_projects/             # Complete projects using DRF
+│── requirements.txt         # Project dependencies
+│── manage.py                # Django entry point
+└── README.md                # This file
 ⚡ Getting Started
 1️⃣ Clone the repository
 bash
 Copy code
-git clone https://github.com/Usman-bin-Khalid/Complete-Course-Backend-Node-Js-Express-Js-Mongo-DB-REST-APIs.git
-cd Complete-Course-Backend-Node-Js-Express-Js-Mongo-DB-REST-APIs
-2️⃣ Install dependencies
+git clone https://github.com/Usman-bin-Khalid/Django-Rest-APIs-Complete-Course.git
+cd Django-Rest-APIs-Complete-Course
+2️⃣ Create a virtual environment
 bash
 Copy code
-npm install
-3️⃣ Setup environment variables
-Create a .env file in the root with values like:
-
-env
+python -m venv venv
+source venv/bin/activate   # For Mac/Linux
+venv\Scripts\activate      # For Windows
+3️⃣ Install dependencies
+bash
 Copy code
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+pip install -r requirements.txt
 4️⃣ Run the server
 bash
 Copy code
-npm run dev
-Server runs on 👉 http://localhost:5000
+python manage.py runserver
+Visit 👉 http://127.0.0.1:8000
 
 🛠️ Tech Stack
-Node.js – JavaScript runtime
+Python 3.9+
 
-Express.js – Web framework
+Django
 
-MongoDB + Mongoose – Database
+Django REST Framework
 
-JWT / OAuth – Authentication
+SQLite / PostgreSQL (for projects)
 
-Postman – API testing
+🎯 Who is this for?
+Beginners who want to learn Django REST Framework from scratch
+
+Django developers who want to add API skills
+
+Anyone building real-world RESTful APIs
 
 📌 Projects Included
 📖 Blog API
 
-👤 Authentication System (JWT-based)
+👤 User Authentication System
 
-🏨 Airbnb Complete Backend
+🚗 CarDekho API (Car Management)
 
 🛒 E-commerce API
 
-🚗 Car Management API
+📰 News API
 
 (More projects coming soon 🚀)
 
-🎯 Who is this for?
-Beginners learning Node.js backend development
-
-Developers who want to master REST APIs
-
-Anyone building real-world backend projects
-
 🤝 Contributing
-Pull requests are welcome! Fork the repo, improve examples, or add new backend concepts and submit a PR.
+Pull requests are welcome! If you’d like to improve examples or add new topics, feel free to fork the repo and submit a PR.
 
 📜 License
 This project is licensed under the MIT License.
 
 🌟 Support
-If this repository helps you, please ⭐ star the repo and share it with other developers learning backend development!
-
+If this repository helps you, don’t forget to ⭐ star the repo and share it with others learning Django REST APIs!
