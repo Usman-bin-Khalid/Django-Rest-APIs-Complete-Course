@@ -20,6 +20,8 @@ class CarSerializer(serializers.ModelSerializer):
         #  exclude =  ['name'] # Except name all fields
          fields = '__all__' # for All Fields
 
+
+ 
 #   def create(self, validate_data):
 #     return CarList.objects.create(**validate_data)
   
@@ -38,13 +40,20 @@ class CarSerializer(serializers.ModelSerializer):
       if value <= 20000.00:
           raise serializers.ValidationError("Price must be greater than 20000.00")
       return value
+  
+   
+
+      
 
 
 # Object level validation
-def validate(self, data):
-    if data['name'] == data['description']:
-        raise serializers.ValidationError("Name and Description must be different")
-    return data
+  def validate(self, data):
+       if data['name'] == data['description']:
+           raise serializers.ValidationError("Name and Description must be different")
+       return data
+  
+
+
 
 
 
