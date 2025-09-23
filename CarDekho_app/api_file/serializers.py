@@ -14,13 +14,16 @@ def alphanumberic(value):
 #   price = serializers.DecimalField(max_digits= 9 , decimal_places= 2)
 
 class CarSerializer(serializers.ModelSerializer):
+  discounted_price = serializers.SerializerMethodField()
   class Meta:
-         model = CarList
+      model = CarList
         #  fields = ['id' , 'name' , 'description'] # for all fields manually
         #  exclude =  ['name'] # Except name all fields
-         fields = '__all__' # for All Fields
+      fields = '__all__' # for All Fields
 
-
+  def get_discounted_price(self , object):
+      discountprice = object.price - 5000
+      return discountprice
  
 #   def create(self, validate_data):
 #     return CarList.objects.create(**validate_data)
