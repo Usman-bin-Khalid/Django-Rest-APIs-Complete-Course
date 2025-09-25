@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import CarList
+from ..models import CarList, ShowRoomList
 
 def alphanumberic(value):
     if not str(value).isalnum():
@@ -13,8 +13,15 @@ def alphanumberic(value):
 #   chassisnumber = serializers.CharField(validators = [alphanumberic])
 #   price = serializers.DecimalField(max_digits= 9 , decimal_places= 2)
 
+class ShowRoomSerializer(serializers.ModelSerializer):
+  class Meta:
+      model = ShowRoomList
+      fields = '__all__'
+
 class CarSerializer(serializers.ModelSerializer):
   discounted_price = serializers.SerializerMethodField()
+
+  
   class Meta:
       model = CarList
         #  fields = ['id' , 'name' , 'description'] # for all fields manually
@@ -24,7 +31,10 @@ class CarSerializer(serializers.ModelSerializer):
   def get_discounted_price(self , object):
       discountprice = object.price - 5000
       return discountprice
- 
+  
+
+  
+
 #   def create(self, validate_data):
 #     return CarList.objects.create(**validate_data)
   
@@ -44,6 +54,11 @@ class CarSerializer(serializers.ModelSerializer):
           raise serializers.ValidationError("Price must be greater than 20000.00")
       return value
   
+
+
+  
+
+  
    
 
       
@@ -54,6 +69,8 @@ class CarSerializer(serializers.ModelSerializer):
        if data['name'] == data['description']:
            raise serializers.ValidationError("Name and Description must be different")
        return data
+  
+  
   
 
 

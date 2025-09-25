@@ -1,10 +1,26 @@
 from django.shortcuts import render
-from .models import CarList
+from .models import CarList, ShowRoomList
 from django.http import JsonResponse
-from .api_file.serializers import CarSerializer
+from .api_file.serializers import CarSerializer, ShowRoomSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.views import APIView
+
+class Showroom_view(APIView):
+     def get(self, request):
+         showroom = ShowRoomList.objects.all()
+         serializer = ShowRoomSerializer(showroom, many=True) 
+         return Response(serializer.data)
+     def post(self, request):
+         serializer = ShowRoomSerializer(data = request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data)
+         else:
+             return Response(serializer.errors)
+         
+         
 # from django.http import HttpResponse
 # import json
 # Create your views here.
@@ -39,6 +55,7 @@ def car_list_view(request):
           return Response(serializer.data)
       else:
          return Response(serializer.errors)
+
 
 
 
