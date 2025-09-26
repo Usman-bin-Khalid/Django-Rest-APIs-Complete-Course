@@ -18,6 +18,8 @@ class ShowRoomSerializer(serializers.ModelSerializer):
       model = ShowRoomList
       fields = '__all__'
 
+          
+
 class CarSerializer(serializers.ModelSerializer):
   discounted_price = serializers.SerializerMethodField()
 
