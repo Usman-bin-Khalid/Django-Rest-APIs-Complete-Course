@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 class Showroom_view(APIView):
      def get(self, request):
          showroom = ShowRoomList.objects.all()
-         serializer = ShowRoomSerializer(showroom, many=True) 
+         serializer = ShowRoomSerializer(showroom, many=True, context={'request': request}) 
          return Response(serializer.data)
      def post(self, request):
          serializer = ShowRoomSerializer(data = request.data)
@@ -34,6 +34,7 @@ class Showroom_Details(APIView):
         serializer = ShowRoomSerializer(showroom, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
@@ -44,8 +45,12 @@ class Showroom_Details(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)        
 
          
-         
-         
+ 
+
+          
+
+
+
 # from django.http import HttpResponse
 # import json
 # Create your views here.

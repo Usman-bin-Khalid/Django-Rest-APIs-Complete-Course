@@ -13,10 +13,7 @@ def alphanumberic(value):
 #   chassisnumber = serializers.CharField(validators = [alphanumberic])
 #   price = serializers.DecimalField(max_digits= 9 , decimal_places= 2)
 
-class ShowRoomSerializer(serializers.ModelSerializer):
-  class Meta:
-      model = ShowRoomList
-      fields = '__all__'
+
 
           
 
@@ -56,6 +53,17 @@ class CarSerializer(serializers.ModelSerializer):
           raise serializers.ValidationError("Price must be greater than 20000.00")
       return value
   
+class ShowRoomSerializer(serializers.ModelSerializer):
+  # Showrooms = serializers.StringRelatedField(many=True)
+  # Showrooms = CarSerializer(many = True , read_only = True)
+  Showrooms = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='car_detail'
+    )
+  class Meta:
+      model = ShowRoomList
+      fields = '__all__'  
 
 
   
