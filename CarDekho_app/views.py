@@ -6,8 +6,17 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+
+
 
 class Showroom_view(APIView):
+     authentication_classes = [BasicAuthentication]
+    #  permission_classes = [IsAuthenticated] # Only Authenticated User can access data
+    #  permission_classes = [AllowAny] # Any user without authentication can access data
+     permission_classes = [IsAdminUser] # Only Admin can access data
+
      def get(self, request):
          showroom = ShowRoomList.objects.all()
          serializer = ShowRoomSerializer(showroom, many=True, context={'request': request}) 

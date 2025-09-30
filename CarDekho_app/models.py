@@ -45,6 +45,10 @@ class Review(models.Model):
         return "the rating of " + self.car.name + ":---" + str(self.rating)
 
 
+    
+
+
+
 
 
 
