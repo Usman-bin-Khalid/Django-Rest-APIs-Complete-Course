@@ -6,16 +6,19 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 
 
 class Showroom_view(APIView):
-     authentication_classes = [BasicAuthentication]
+    #  authentication_classes = [BasicAuthentication]
     #  permission_classes = [IsAuthenticated] # Only Authenticated User can access data
     #  permission_classes = [AllowAny] # Any user without authentication can access data
-     permission_classes = [IsAdminUser] # Only Admin can access data
+    #  permission_classes = [IsAdminUser] # Only Admin can access data
+    # Session Authentication ko apply krny ky liy phly admin to logout krna pry ga
+     authentication_classes = [SessionAuthentication]
+     permission_classes = [IsAuthenticated]
 
      def get(self, request):
          showroom = ShowRoomList.objects.all()
@@ -28,6 +31,8 @@ class Showroom_view(APIView):
              return Response(serializer.data)
          else:
              return Response(serializer.errors)
+
+
 
 class Showroom_Details(APIView):
     def get(self, request, pk):

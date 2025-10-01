@@ -20,4 +20,5 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('car/' , include('CarDekho_app.urls')),
+    path('auth/' , include('rest_framework.urls' , namespace= 'rest_framework')), # For Session Authentication show Login option
 ]
