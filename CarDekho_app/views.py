@@ -1,15 +1,31 @@
 from django.shortcuts import render
-from .models import CarList, ShowRoomList
+from .models import CarList, ShowRoomList, Review
 from django.http import JsonResponse
-from .api_file.serializers import CarSerializer, ShowRoomSerializer
+from .api_file.serializers import CarSerializer, ShowRoomSerializer, ReviewSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework import mixins
+from rest_framework import generics
 
 
+class ReviewDetails(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 class Showroom_view(APIView):
     #  authentication_classes = [BasicAuthentication]
