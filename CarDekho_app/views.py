@@ -9,27 +9,38 @@ from rest_framework.views import APIView
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
 from rest_framework import mixins
+
 from rest_framework import generics
 
 
-class ReviewDetails(mixins.RetrieveModelMixin, generics.GenericAPIView):
+class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
 
-class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-    # Only saw information but you can not update or delete information
-    # Using DjangoModelPermissions
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [DjangoModelPermissions]
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    serializer_class = ReviewSerializer    
+
+
+# class ReviewDetails(mixins.RetrieveModelMixin, generics.GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+
+# class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+#     # Only saw information but you can not update or delete information
+#     # Using DjangoModelPermissions
+#     authentication_classes = [SessionAuthentication]
+#     permission_classes = [DjangoModelPermissions]
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
     
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
 
 class Showroom_view(APIView):
     #  authentication_classes = [BasicAuthentication]
