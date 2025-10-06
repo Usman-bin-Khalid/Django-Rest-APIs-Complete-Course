@@ -8,8 +8,10 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
+from django.shortcuts import get_object_or_404
 from rest_framework import mixins
 
+from rest_framework import viewsets
 from rest_framework import generics
 
 
@@ -40,6 +42,19 @@ class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     
 #     def post(self, request, *args, **kwargs):
 #         return self.create(request, *args, **kwargs)
+
+
+class Showroom_Viewset(viewsets.ViewSet):
+     def list(self, request):
+         queryset = ShowRoomList.objects.all()
+         serializer = ShowRoomSerializer(queryset, many=True)
+         return Response(serializer.data)
+
+     def retrieve(self, request, pk=None):
+         queryset = ShowRoomList.objects.all()
+         user = get_object_or_404(queryset, pk=pk)
+         serializer = ShowRoomSerializer(user)
+         return Response(serializer.data)
 
 
 class Showroom_view(APIView):
