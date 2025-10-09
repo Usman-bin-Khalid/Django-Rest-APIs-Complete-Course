@@ -43,29 +43,32 @@ class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
 #     def post(self, request, *args, **kwargs):
 #         return self.create(request, *args, **kwargs)
 
-
-class Showroom_Viewset(viewsets.ViewSet):
-     def list(self, request):
-         queryset = ShowRoomList.objects.all()
-         serializer = ShowRoomSerializer(queryset, many=True,
-         context={'request': request} )
-         return Response(serializer.data)
-
-     def retrieve(self, request, pk=None):
-         queryset = ShowRoomList.objects.all()
-         user = get_object_or_404(queryset, pk=pk)
-         serializer = ShowRoomSerializer(user,
-                                         context={'request': request})
-         return Response(serializer.data)
+class Showroom_Viewset(viewsets.ModelViewSet):
+     queryset = ShowRoomList.objects.all()
+     serializer_class = ShowRoomSerializer
      
-     def create(self, request):
-         serializer = ShowRoomSerializer(data = request.data)
-         if serializer.is_valid():
-            serializer.save()
+# class Showroom_Viewset(viewsets.ViewSet):
+#      def list(self, request):
+#          queryset = ShowRoomList.objects.all()
+#          serializer = ShowRoomSerializer(queryset, many=True,
+#          context={'request': request} )
+#          return Response(serializer.data)
+
+#      def retrieve(self, request, pk=None):
+#          queryset = ShowRoomList.objects.all()
+#          user = get_object_or_404(queryset, pk=pk)
+#          serializer = ShowRoomSerializer(user,
+#                                          context={'request': request})
+#          return Response(serializer.data)
+     
+#      def create(self, request):
+#          serializer = ShowRoomSerializer(data = request.data)
+#          if serializer.is_valid():
+#             serializer.save()
             
-            return Response(serializer.data)
-         else:
-            return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+#             return Response(serializer.data)
+#          else:
+#             return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 
 class Showroom_view(APIView):
