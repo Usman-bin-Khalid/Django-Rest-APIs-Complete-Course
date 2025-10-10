@@ -14,10 +14,20 @@ from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework import generics
 
-
-class ReviewList(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
+class ReviewCreate(generics.ListAPIView):
     serializer_class = ReviewSerializer
+    def perform_create(self, serializer):
+        pk = self.kwargs['pk']
+        cars = ShowRoomList.objects.get(pk = pk)
+        serializer.save(ShowRoomList = cars)
+      
+
+class ReviewList(generics.ListAPIView):
+    # queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        return Review.objects.filter(car = pk) 
 
 class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()

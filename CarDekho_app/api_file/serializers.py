@@ -17,6 +17,7 @@ def alphanumberic(value):
 class ReviewSerializer (serializers.ModelSerializer):
   class Meta:
       model = Review
+      exclude = ('car',) 
       fields = '__all__'   
           
 
