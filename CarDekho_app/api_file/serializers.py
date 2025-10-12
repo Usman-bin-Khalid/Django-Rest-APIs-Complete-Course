@@ -13,12 +13,17 @@ def alphanumberic(value):
 #   chassisnumber = serializers.CharField(validators = [alphanumberic])
 #   price = serializers.DecimalField(max_digits= 9 , decimal_places= 2)
 
-
 class ReviewSerializer (serializers.ModelSerializer):
-  class Meta:
-      model = Review
-      exclude = ('car',) 
-      fields = '__all__'   
+    # Add a field to receive the CarList ID from the request data
+    car_id = serializers.PrimaryKeyRelatedField(
+        queryset=CarList.objects.all(), source='car', write_only=True
+    )
+    class Meta:
+        model = Review
+        exclude = ('car',) # Keep this for the serializer, as 'car_id' handles it
+        # You may need to review the exclude if it conflicts with the new car_id field
+     
+       
           
 
 class CarSerializer(serializers.ModelSerializer):
