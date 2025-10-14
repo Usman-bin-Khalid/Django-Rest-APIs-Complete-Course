@@ -18,6 +18,8 @@ class ReviewSerializer (serializers.ModelSerializer):
     car_id = serializers.PrimaryKeyRelatedField(
         queryset=CarList.objects.all(), source='car', write_only=True
     )
+    apiuser = serializers.StringRelatedField(read_only = True)
+    
     class Meta:
         model = Review
         exclude = ('car',) # Keep this for the serializer, as 'car_id' handles it

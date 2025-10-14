@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.exceptions import ValidationError
 from .models import CarList, ShowRoomList, Review
 from django.http import JsonResponse
 from .api_file.serializers import CarSerializer, ShowRoomSerializer, ReviewSerializer
@@ -16,11 +17,24 @@ from rest_framework import generics
 
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        return Review.objects.all()
     
     def perform_create(self, serializer):
         # The serializer automatically handles the foreign key (car) via car_id field.
         # We don't need to manually fetch CarList.objects.get(pk=pk).
-        serializer.save()
+        useredit = self.request.user
+        Review_queryset = Review.objects.filter(apiuser = useredit)
+        if Review_queryset.exists():
+            raise ValidationError('You have already reviewed this car')
+        serializer.save(apiuser = useredit)
+
+    
+
+
+        
+
 
 
 
