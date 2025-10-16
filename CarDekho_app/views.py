@@ -3,6 +3,7 @@ from rest_framework.exceptions import ValidationError
 from .models import CarList, ShowRoomList, Review
 from django.http import JsonResponse
 from .api_file.serializers import CarSerializer, ShowRoomSerializer, ReviewSerializer
+from .api_file.permissions import AdminOrReadOnlyPermissions , ReviewUserOrReadyOnlyPermissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -47,7 +48,8 @@ class ReviewList(generics.ListAPIView):
 
 class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer    
+    serializer_class = ReviewSerializer   
+    permission_classes = [AdminOrReadOnlyPermissions] 
 
 
 # class ReviewDetails(mixins.RetrieveModelMixin, generics.GenericAPIView):
