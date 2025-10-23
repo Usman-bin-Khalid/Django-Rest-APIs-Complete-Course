@@ -12,7 +12,7 @@ from rest_framework.authentication import BasicAuthentication, SessionAuthentica
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins
-
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import viewsets
 from rest_framework import generics
 
@@ -42,8 +42,9 @@ class ReviewCreate(generics.CreateAPIView):
 class ReviewList(generics.ListAPIView):
     # queryset = Review.objects.all()  
     serializer_class = ReviewSerializer
-    permission_classes = [AdminOrReadOnlyPermissions]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def get_queryset(self):
         pk = self.kwargs['pk']
        
