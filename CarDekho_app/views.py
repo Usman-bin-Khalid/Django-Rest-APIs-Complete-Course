@@ -15,7 +15,9 @@ from rest_framework import mixins
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import viewsets
 from rest_framework import generics
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
+from .api_file.pagination import ReviewListPagination
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
 
@@ -44,6 +46,7 @@ class ReviewList(generics.ListAPIView):
     serializer_class = ReviewSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+    pagination_class = ReviewListPagination
     
     def get_queryset(self):
         pk = self.kwargs['pk']
@@ -55,6 +58,7 @@ class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer   
     
     authentication_classes = [TokenAuthentication]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     permission_classes = [ReviewUserOrReadyOnlyPermissions]
 
 
