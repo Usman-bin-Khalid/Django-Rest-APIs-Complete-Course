@@ -17,7 +17,7 @@ from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
-from .api_file.pagination import ReviewListPagination
+from .api_file.pagination import ReviewListPagination, ReviewListLimitOffPage
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
 
@@ -43,10 +43,11 @@ class ReviewCreate(generics.CreateAPIView):
 
 class ReviewList(generics.ListAPIView):
     # queryset = Review.objects.all()  
-    serializer_class = ReviewSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    pagination_class = ReviewListPagination
+    # serializer_class = ReviewSerializer
+    # authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # pagination_class = ReviewListPagination
+    pagination_class = ReviewListLimitOffPage
     
     def get_queryset(self):
         pk = self.kwargs['pk']
